@@ -3,52 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>W-Coin Style Tap-to-Earn</title>
+    <title>StarSeek Style Tap-to-Earn</title>
     <style>
         /* Global Resets and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif; /* A more neutral, space-age font */
         }
 
         body {
-            background-color: #12121f; /* Dark background */
-            color: #e0e0e0; /* Light text */
+            background-color: #0B022E; /* Deep space blue/purple */
+            color: #E0E0FF; /* Lavender white text */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
             height: 100vh;
-            overflow: hidden; /* Prevents scrolling of the body itself */
-            -webkit-tap-highlight-color: transparent; /* Disable tap highlight on mobile */
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* App Container */
         #app-container {
             width: 100%;
-            max-width: 480px; /* Max width for mobile-like appearance */
+            max-width: 480px;
             height: 100%;
-            background-color: #1a1a2e; /* Slightly lighter dark shade for app area */
+            background-color: #140640; /* Slightly lighter deep space */
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            position: relative; /* For absolute positioning of notifications */
+            box-shadow: 0 0 25px rgba(74, 0, 224, 0.5); /* Purple glow */
+            position: relative;
         }
 
         /* Header */
         #app-header {
             padding: 15px;
-            background-color: #22223b; /* Header background */
+            background-color: #1F0A58; /* Header dark purple */
             text-align: center;
-            border-bottom: 1px solid #333355;
+            border-bottom: 1px solid #3D1F7A;
         }
 
         #user-info {
             font-size: 0.9em;
             margin-bottom: 10px;
-            color: #c0c0ff;
+            color: #C0C0FF;
         }
 
         #username-display {
@@ -57,13 +57,13 @@
 
         #balance-display {
             font-weight: bold;
-            color: #ffd700; /* Gold color for balance */
+            color: #F0E130; /* Star yellow */
         }
 
         #energy-bar-container {
             width: 80%;
             margin: 0 auto;
-            background-color: #333355;
+            background-color: #3D1F7A; /* Darker purple for bar background */
             border-radius: 10px;
             padding: 3px;
             height: 25px;
@@ -72,9 +72,9 @@
         
         #energy-bar-inner {
             height: 100%;
-            background: linear-gradient(90deg, #6a0dad, #007bff); /* Purple to Blue gradient */
+            background: linear-gradient(90deg, #7B2CBF, #3498DB); /* Purple to Space Blue gradient */
             border-radius: 7px;
-            width: 100%; /* Initial width */
+            width: 100%;
             transition: width 0.3s ease-in-out;
             display: flex;
             align-items: center;
@@ -90,16 +90,15 @@
             text-shadow: 1px 1px 2px #000;
         }
 
-
         /* Content Area */
         #app-content {
             flex-grow: 1;
-            overflow-y: auto; /* Allow scrolling within content area */
+            overflow-y: auto;
             padding: 15px;
         }
 
         .section {
-            display: none; /* Hidden by default */
+            display: none;
             animation: fadeIn 0.5s ease;
         }
 
@@ -116,14 +115,14 @@
         #bottom-nav {
             display: flex;
             justify-content: space-around;
-            background-color: #22223b; /* Nav background */
+            background-color: #1F0A58; /* Nav background */
             padding: 10px 0;
-            border-top: 1px solid #333355;
+            border-top: 1px solid #3D1F7A;
         }
 
         .nav-button {
             background-color: transparent;
-            color: #a0a0cf; /* Muted purple/blue */
+            color: #A0A0CF; /* Muted lavender */
             border: none;
             padding: 10px 15px;
             font-size: 0.9em;
@@ -134,47 +133,52 @@
         }
 
         .nav-button.active {
-            color: #ffffff; /* Active tab color */
-            /* background-color: #333355; */
-            border-top: 2px solid #6a0dad; /* Purple accent */
+            color: #FFFFFF; /* Active tab color */
+            border-top: 2px solid #F0E130; /* Star yellow accent */
         }
         .nav-button:hover:not(.active) {
-            color: #e0e0ff;
+            color: #E0E0FF;
         }
 
         /* Tap Section */
         #tap-section {
             text-align: center;
+            padding-top: 20px;
         }
 
-        #coin-container {
+        #star-icon-container {
             margin: 20px auto;
             width: 180px;
             height: 180px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #ffd700, #f0c000, #e0a800);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            user-select: none; /* Prevent text selection */
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+            user-select: none;
             transition: transform 0.1s ease-out;
+            /* Pulsing star effect */
+            animation: pulseStar 2s infinite ease-in-out;
         }
-        #coin-container:active {
+         #star-icon-container:active {
             transform: scale(0.95);
+            animation: none; /* Stop pulsing when active */
         }
-        #coin-icon {
-            font-size: 4em;
-            color: #8b4513; /* Brownish for "W" */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        #star-icon {
+            font-size: 7em; /* Larger star */
+            color: #F0E130; /* Star yellow */
+            text-shadow: 0 0 15px #F0E130, 0 0 25px #F0E130, 0 0 5px #000;
+        }
+        @keyframes pulseStar {
+            0% { transform: scale(1); opacity: 1;}
+            50% { transform: scale(1.1); opacity: 0.8;}
+            100% { transform: scale(1); opacity: 1;}
         }
         
         .floating-text-container {
-            position: fixed; /* Relative to viewport or a specific container */
+            position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            pointer-events: none; /* Allows clicks to pass through */
+            pointer-events: none;
             z-index: 1000;
         }
 
@@ -182,22 +186,22 @@
             position: absolute;
             font-size: 1.5em;
             font-weight: bold;
-            color: #ffd700;
+            color: #F0E130; /* Star yellow */
             opacity: 1;
-            animation: floatUp 1.5s ease-out forwards;
+            animation: floatUpStar 1.5s ease-out forwards;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
 
-        @keyframes floatUp {
+        @keyframes floatUpStar {
             0% { transform: translateY(0) scale(1); opacity: 1; }
             100% { transform: translateY(-80px) scale(1.5); opacity: 0; }
         }
 
         #boosters-section {
-            margin-top: 20px;
+            margin-top: 30px;
         }
         .booster-button {
-            background-color: #4a0e8b; /* Dark purple */
+            background-color: #5A189A; /* Darker Purple */
             color: white;
             border: none;
             padding: 10px 15px;
@@ -208,43 +212,43 @@
             transition: background-color 0.2s;
         }
         .booster-button:hover {
-            background-color: #6a0dad; /* Lighter purple */
+            background-color: #7B2CBF; /* Amethyst Purple */
         }
         .booster-button:disabled {
-            background-color: #555;
+            background-color: #4A235A; /* Muted purple */
             cursor: not-allowed;
         }
         #active-boosters-display {
             margin-top: 10px;
             font-size: 0.8em;
-            color: #a0a0cf;
+            color: #A0A0CF;
         }
 
 
-        /* Tasks Section */
-        .task-list, .staking-history-list, .referral-list {
+        /* Tasks & Referrals Sections */
+        .list-item-container { /* Generic container for task, referral, transaction items */
             list-style: none;
         }
-        .task-item, .staked-item, .referral-item {
-            background-color: #22223b;
+        .list-item {
+            background-color: #1F0A58; /* Dark purple item background */
             padding: 12px;
             margin-bottom: 10px;
             border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-left: 4px solid #6a0dad;
+            border-left: 4px solid #7B2CBF; /* Amethyst purple accent */
         }
-        .task-info p, .staked-info p, .referral-info p {
+        .item-info p {
             margin: 2px 0;
             font-size: 0.9em;
         }
-        .task-reward, .staked-reward {
-            color: #ffd700;
+        .item-reward, .item-value {
+            color: #F0E130; /* Star yellow */
             font-weight: bold;
         }
-        .task-actions button, .staking-actions button, .referral-actions button {
-            background-color: #007bff; /* Blue */
+        .item-actions button {
+            background-color: #3498DB; /* Space Blue */
             color: white;
             border: none;
             padding: 8px 12px;
@@ -252,17 +256,17 @@
             cursor: pointer;
             transition: background-color 0.2s;
         }
-        .task-actions button:hover, .staking-actions button:hover, .referral-actions button:hover {
-            background-color: #0056b3;
+        .item-actions button:hover {
+            background-color: #217dbb; /* Darker Space Blue */
         }
-        .task-actions button:disabled {
-            background-color: #555;
+        .item-actions button:disabled {
+            background-color: #4A235A; /* Muted purple */
             cursor: not-allowed;
         }
 
-        /* Mates Section */
+        /* Referrals Section */
         #referral-info-box {
-            background-color: #22223b;
+            background-color: #1F0A58;
             padding: 15px;
             margin-bottom: 15px;
             border-radius: 8px;
@@ -273,14 +277,14 @@
             margin-top: 5px;
             margin-bottom: 10px;
             border-radius: 4px;
-            border: 1px solid #444;
-            background-color: #333355;
-            color: #e0e0e0;
+            border: 1px solid #3D1F7A;
+            background-color: #140640;
+            color: #E0E0FF;
             width: calc(100% - 20px);
         }
         #referral-code-display {
             font-weight: bold;
-            color: #c0c0ff;
+            color: #C0C0FF;
             cursor: pointer;
         }
         #leaderboard {
@@ -289,32 +293,32 @@
         #leaderboard h4 {
             text-align: center;
             margin-bottom: 10px;
-            color: #c0c0ff;
+            color: #C0C0FF;
         }
 
-        /* Staking Section */
-        #staking-form {
-            background-color: #22223b;
+        /* Withdraw Section */
+        #withdraw-form {
+            background-color: #1F0A58;
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 8px;
         }
-        #staking-form label {
+        #withdraw-form label {
             display: block;
             margin-bottom: 5px;
             font-size: 0.9em;
         }
-        #staking-form input, #staking-form select {
+        #withdraw-form input, #withdraw-form select {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
-            border: 1px solid #444;
-            background-color: #333355;
-            color: #e0e0e0;
+            border: 1px solid #3D1F7A;
+            background-color: #140640;
+            color: #E0E0FF;
         }
-        #staking-form button {
-            background-color: #6a0dad; /* Purple */
+        #withdraw-form button {
+            background-color: #7B2CBF; /* Amethyst Purple */
             color: white;
             padding: 10px 15px;
             border: none;
@@ -323,15 +327,22 @@
             width: 100%;
             font-size: 1em;
         }
-        #staking-form button:hover {
-            background-color: #5a0cac;
+        #withdraw-form button:hover {
+            background-color: #5A189A;
         }
-        .staked-item .progress-bar-container {
-            width: 100px; height: 8px; background-color: #444; border-radius: 4px; margin-top: 5px;
+        .disclaimer {
+            font-size: 0.8em;
+            color: #A0A0CF;
+            margin-top: 10px;
+            text-align: center;
+            border: 1px dashed #3D1F7A;
+            padding: 8px;
+            border-radius: 4px;
         }
-        .staked-item .progress-bar {
-            height: 100%; background-color: #007bff; border-radius: 4px;
-        }
+        .transaction-status-Pending { color: #F0E130; } /* Yellow */
+        .transaction-status-Completed { color: #2ECC71; } /* Green */
+        .transaction-status-Failed { color: #E74C3C; } /* Red */
+
 
         /* General Utility */
         .text-center { text-align: center; }
@@ -340,20 +351,20 @@
         .mb-1 { margin-bottom: 10px; }
         .mb-2 { margin-bottom: 20px; }
         h3 {
-            color: #c0c0ff;
+            color: #C0C0FF;
             margin-bottom: 15px;
             text-align: center;
-            border-bottom: 1px solid #333355;
+            border-bottom: 1px solid #3D1F7A;
             padding-bottom: 10px;
         }
 
         /* Notification Styles */
         .notification {
             position: fixed;
-            bottom: 70px; /* Above nav bar */
+            bottom: 70px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #333;
+            background-color: #333; /* Fallback, themed below */
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -362,17 +373,13 @@
             opacity: 0;
             transition: opacity 0.5s, bottom 0.5s;
         }
-
         .notification.show {
             opacity: 1;
             bottom: 80px;
         }
-        .notification.error {
-            background-color: #d9534f; /* Red for errors */
-        }
-        .notification.success {
-            background-color: #5cb85c; /* Green for success */
-        }
+        .notification.info { background-color: #3498DB; /* Space Blue */ }
+        .notification.error { background-color: #E74C3C; /* Red */ }
+        .notification.success { background-color: #28A745; /* Green (Bootstrap like) */ }
 
     </style>
 </head>
@@ -381,7 +388,7 @@
     <div id="app-container">
         <header id="app-header">
             <div id="user-info">
-                Welcome, <span id="username-display">Player</span>! | Balance: <span id="balance-display">0</span> WTC
+                Explorer <span id="username-display">Player</span>! | Balance: <span id="balance-display">0</span> Points
             </div>
             <div id="energy-bar-container">
                 <div id="energy-bar-inner"></div>
@@ -392,15 +399,14 @@
         <main id="app-content">
             <!-- Tap Section -->
             <section id="tap-section" class="section active">
-                <h3>Tap to Earn</h3>
-                <div id="coin-container" ontouchstart=""> <!-- ontouchstart for :active on iOS -->
-                    <span id="coin-icon">W</span>
+                <h3>Tap the Star!</h3>
+                <div id="star-icon-container" ontouchstart="">
+                    <span id="star-icon">🌟</span>
                 </div>
                 <div id="boosters-section">
                     <h4>Boosters</h4>
                     <button id="booster-full-energy" class="booster-button">⚡ Full Energy (1)</button>
-                    <button id="booster-turbo-tap" class="booster-button">🚀 Turbo Tap (x3)</button>
-                    <!-- <button id="booster-energy-saver" class="booster-button">🔋 Energy Saver (50%)</button> -->
+                    <button id="booster-star-surge" class="booster-button">🚀 Star Surge (x3)</button>
                     <div id="active-boosters-display" class="mt-1"></div>
                 </div>
                  <div class="floating-text-container" id="floating-text-container"></div>
@@ -408,71 +414,70 @@
 
             <!-- Tasks Section -->
             <section id="tasks-section" class="section">
-                <h3>Daily Tasks</h3>
-                <ul id="task-list" class="task-list">
+                <h3>Daily Missions</h3>
+                <ul id="task-list" class="list-item-container">
                     <!-- Tasks will be populated by JavaScript -->
                 </ul>
-                <h3 class="mt-2">Partner Tasks</h3>
-                <ul id="partner-task-list" class="task-list">
+                <h3 class="mt-2">Alliance Missions</h3>
+                <ul id="partner-task-list" class="list-item-container">
                      <!-- Partner Tasks will be populated by JavaScript -->
                 </ul>
             </section>
 
-            <!-- Mates Section -->
-            <section id="mates-section" class="section">
-                <h3>Referral Program</h3>
+            <!-- Referrals Section -->
+            <section id="referrals-section" class="section">
+                <h3>Invite Explorers</h3>
                 <div id="referral-info-box">
-                    <p>Your Referral Code: <strong id="referral-code-display" title="Click to copy"></strong></p>
-                    <p>Friends Referred: <span id="referred-friends-count">0</span></p>
+                    <p>Your Invite Code: <strong id="referral-code-display" title="Click to copy"></strong></p>
+                    <p>Explorers Recruited: <span id="referred-friends-count">0</span></p>
                     <div class="mt-1">
-                        <input type="text" id="enter-referral-code" placeholder="Enter friend's referral code">
-                        <button id="submit-referral-code-button" class="task-actions-button" style="width:100%; margin-top:5px;">Submit Code</button>
+                        <input type="text" id="enter-referral-code" placeholder="Enter friend's invite code">
+                        <button id="submit-referral-code-button" class="item-actions-button" style="width:100%; margin-top:5px;">Submit Code</button>
                     </div>
                 </div>
                 <div id="leaderboard">
-                    <h4>Referral Leaderboard (Mock)</h4>
-                    <ul id="leaderboard-list" class="referral-list">
-                        <!-- Mock leaderboard data -->
-                        <li class="referral-item"><div class="referral-info"><p>User123</p></div> <span>15 Referrals</span></li>
-                        <li class="referral-item"><div class="referral-info"><p>PlayerX</p></div> <span>12 Referrals</span></li>
-                        <li class="referral-item"><div class="referral-info"><p>TapMaster</p></div> <span>10 Referrals</span></li>
+                    <h4>Top Recruiters (Mock)</h4>
+                    <ul id="leaderboard-list" class="list-item-container">
+                        <li class="list-item"><div class="item-info"><p>CmdrShepard</p></div> <span>15 Recruits</span></li>
+                        <li class="list-item"><div class="item-info"><p>StarLord</p></div> <span>12 Recruits</span></li>
+                        <li class="list-item"><div class="item-info"><p>NovaPrime</p></div> <span>10 Recruits</span></li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Staking Section -->
-            <section id="staking-section" class="section">
-                <h3>Stake Your Tokens</h3>
-                <form id="staking-form">
+            <!-- Withdraw Section -->
+            <section id="withdraw-section" class="section">
+                <h3>Withdraw Points (Simulation)</h3>
+                <form id="withdraw-form">
                     <div>
-                        <label for="staking-amount">Amount to Stake:</label>
-                        <input type="number" id="staking-amount" placeholder="Min 100 WTC" min="100">
+                        <label for="withdraw-amount">Amount to Withdraw (Points):</label>
+                        <input type="number" id="withdraw-amount" placeholder="Enter points">
                     </div>
                     <div>
-                        <label for="staking-duration">Staking Duration:</label>
-                        <select id="staking-duration">
+                        <label for="withdraw-method">Withdrawal Method:</label>
+                        <select id="withdraw-method">
                             <!-- Options will be populated by JavaScript -->
                         </select>
                     </div>
-                    <button type="submit" id="stake-button">Stake Now</button>
+                    <div id="min-withdraw-display" class="mb-1" style="font-size:0.8em; color:#A0A0CF;"></div>
+                    <div id="fee-display" class="mb-1" style="font-size:0.8em; color:#A0A0CF;"></div>
+
+                    <button type="submit" id="withdraw-button">Request Withdraw (Simulated)</button>
+                    <p class="disclaimer"><strong>Disclaimer:</strong> This is a simulation. No real money or cryptocurrency will be transferred. Withdrawal requests are logged locally for demonstration purposes only.</p>
                 </form>
 
-                <h3 class="mt-2">Active Stakes</h3>
-                <ul id="active-stakes-list" class="staking-history-list">
-                    <!-- Active stakes will be populated here -->
-                </ul>
-                <h3 class="mt-2">Staking History</h3>
-                <ul id="staking-history-list" class="staking-history-list">
-                    <!-- Completed stakes will be populated here -->
+                <h3 class="mt-2">Withdrawal History (Simulated)</h3>
+                <ul id="withdrawal-history-list" class="list-item-container">
+                    <!-- Withdrawal history will be populated here -->
                 </ul>
             </section>
         </main>
 
         <nav id="bottom-nav">
-            <button data-tab="tap-section" class="nav-button active">⛏️ Tap</button>
+            <button data-tab="tap-section" class="nav-button active">🌟 Tap</button>
             <button data-tab="tasks-section" class="nav-button">📋 Tasks</button>
-            <button data-tab="mates-section" class="nav-button">👥 Mates</button>
-            <button data-tab="staking-section" class="nav-button">💰 Staking</button>
+            <button data-tab="referrals-section" class="nav-button">🤝 Referrals</button>
+            <button data-tab="withdraw-section" class="nav-button">💸 Withdraw</button>
         </nav>
     </div>
     <div id="notification-area"></div>
@@ -483,144 +488,136 @@
     <script>
         // --- Mock Telegram WebApp SDK for local development ---
         if (typeof window.Telegram === 'undefined' || typeof window.Telegram.WebApp === 'undefined') {
-            console.log("Telegram WebApp SDK not found, using mock data.");
+            console.log("Telegram WebApp SDK not found, using mock data for StarSeek.");
             window.Telegram = {
                 WebApp: {
                     initDataUnsafe: {
                         user: {
-                            id: `mock_user_${Math.floor(Math.random() * 100000)}`,
-                            username: 'mock_user',
-                            first_name: 'Mock',
+                            id: `mock_user_star_${Math.floor(Math.random() * 100000)}`,
+                            username: 'mock_star_user',
+                            first_name: 'MockStar',
                             last_name: 'User',
                             language_code: 'en'
                         },
-                        query_id: "mock_query_id_12345"
+                        query_id: "mock_query_id_star_67890"
                     },
                     ready: () => { console.log("Mock Telegram.WebApp.ready() called"); },
                     expand: () => { console.log("Mock Telegram.WebApp.expand() called"); },
-                    MainButton: {
-                        isVisible: false,
-                        text: '',
-                        color: '#007bff',
-                        textColor: '#ffffff',
-                        setText: function(text) { this.text = text; console.log(`Mock MainButton.setText: ${text}`); },
-                        show: function() { this.isVisible = true; console.log("Mock MainButton.show()"); },
-                        hide: function() { this.isVisible = false; console.log("Mock MainButton.hide()"); },
-                        onClick: function(callback) { this._mainButtonCallback = callback; console.log("Mock MainButton.onClick registered"); },
-                        _click: function() { if(this._mainButtonCallback) this._mainButtonCallback(); }
-                    },
+                    MainButton: { /* ... (same mock as before) ... */ },
                     sendData: (data) => console.log(`Mock Telegram.WebApp.sendData called with: ${data}`),
                     close: () => console.log("Mock Telegram.WebApp.close() called"),
-                    onEvent: (eventType, eventHandler) => console.log(`Mock Telegram.WebApp.onEvent: ${eventType}`),
-                    offEvent: (eventType, eventHandler) => console.log(`Mock Telegram.WebApp.offEvent: ${eventType}`),
+                    onEvent: (eventType, eventHandler) => {},
+                    offEvent: (eventType, eventHandler) => {},
                     colorScheme: 'dark',
                     themeParams: {
-                        bg_color: '#1a1a2e',
-                        text_color: '#e0e0e0',
-                        hint_color: '#a0a0cf',
-                        link_color: '#8774e1',
-                        button_color: '#8774e1',
+                        bg_color: '#140640',
+                        text_color: '#E0E0FF',
+                        hint_color: '#A0A0CF',
+                        link_color: '#82AAFF',
+                        button_color: '#7B2CBF',
                         button_text_color: '#ffffff',
-                        secondary_bg_color: '#22223b',
+                        secondary_bg_color: '#1F0A58',
                     }
                 }
+            };
+             // Simplified MainButton mock
+            window.Telegram.WebApp.MainButton = {
+                isVisible: false, text: '', color: '#007bff', textColor: '#ffffff',
+                setText: function(text) { this.text = text; },
+                show: function() { this.isVisible = true; },
+                hide: function() { this.isVisible = false; },
+                onClick: function(callback) { this._mainButtonCallback = callback; },
+                _click: function() { if(this._mainButtonCallback) this._mainButtonCallback(); }
             };
         }
 
         // --- Application Code ---
-        const WCoinApp = {
+        const StarSeekApp = {
             // --- Constants ---
             CONFIG: {
-                STORAGE_KEY: 'wCoinCloneUserData',
-                INITIAL_BALANCE: 0,
-                MAX_ENERGY: 500,
-                ENERGY_REGEN_RATE_PER_SEC: 1, // Energy points per second
-                ENERGY_REGEN_INTERVAL: 1000, // Check every second
+                STORAGE_KEY: 'starSeekCloneUserData',
+                INITIAL_POINTS: 0,
+                MAX_ENERGY: 1000,
+                ENERGY_REGEN_RATE_PER_SEC: 2, 
+                ENERGY_REGEN_INTERVAL: 1000,
                 TAP_BASE_REWARD: 1,
-                ENERGY_PER_TAP: 1,
+                ENERGY_PER_TAP: 2,
                 REFERRAL_BONUS_REFERRER: 500,
                 REFERRAL_BONUS_REFERRED: 250,
                 BOOSTERS: {
-                    FULL_ENERGY: { id: 'full_energy', name: 'Full Energy', uses: 1, cost: 0 /* or token cost */ },
-                    TURBO_TAP: { id: 'turbo_tap', name: 'Turbo Tap', duration_ms: 30000, multiplier: 3, uses: 1, cost: 0 }
+                    FULL_ENERGY: { id: 'full_energy', name: 'Full Energy', uses: 1, cost: 0 },
+                    STAR_SURGE: { id: 'star_surge', name: 'Star Surge', duration_ms: 20000, multiplier: 3, uses: 1, cost: 0 }
                 },
                 DAILY_TASKS: [
-                    { id: 'daily_login', name: 'Daily Check-in', reward: 100, icon: '📅', action: () => WCoinApp.showNotification("Checked in!", "success") },
-                    { id: 'watch_promo', name: 'Watch Promo (Simulated)', reward: 50, icon: '📺', action: () => WCoinApp.showNotification("Promo 'watched'!", "success") },
-                    { id: 'join_community', name: 'Join Community (Simulated)', reward: 75, icon: '🌐', action: () => WCoinApp.showNotification("Community 'joined'!", "success") },
+                    { id: 'daily_scan', name: 'Daily System Scan', reward: 100, icon: '🛰️', action: () => StarSeekApp.showNotification("System Scan Complete!", "success") },
+                    { id: 'view_transmission', name: 'View Transmission (Sim)', reward: 75, icon: '📡', action: () => StarSeekApp.showNotification("Transmission 'viewed'!", "success") },
+                    { id: 'join_fleet', name: 'Join Fleet (Sim)', reward: 150, icon: '🚀', action: () => StarSeekApp.showNotification("Fleet 'joined'!", "success") },
                 ],
-                PARTNER_TASKS: [ // One-time completion tasks
-                    { id: 'partner_cmc', name: 'Follow CoinMarketCap', reward: 150, icon: '📈', link: '#' },
-                    { id: 'partner_coingabbar', name: 'Visit Coin Gabbar', reward: 150, icon: '📊', link: '#' },
-                    { id: 'partner_kucoin', name: 'Check out KuCoin', reward: 200, icon: '🏦', link: '#' },
-                    { id: 'partner_bitget', name: 'Explore Bitget', reward: 200, icon: '🔗', link: '#' },
+                PARTNER_TASKS: [
+                    { id: 'partner_galaxy_news', name: 'Follow Galaxy News', reward: 200, icon: '📰', link: '#' },
+                    { id: 'partner_star_maps', name: 'Visit Star Maps Inc.', reward: 200, icon: '🗺️', link: '#' },
                 ],
-                STAKING_OPTIONS: [
-                    { durationDays: 7, interestRate: 0.01 }, // 1% for 7 days
-                    { durationDays: 30, interestRate: 0.05 }, // 5% for 30 days
-                    { durationDays: 90, interestRate: 0.12 }, // 12% for 90 days
+                MIN_WITHDRAWAL_POINTS_GLOBAL: 5000, // A general minimum before even showing specific method minimums
+                WITHDRAWAL_OPTIONS: [ // Points are game points, USD equivalent is for display flavor
+                    { id: 'paypal', name: 'PayPal (min 10k Points)', minPoints: 10000, feePercent: 0.02, detailsPlaceholder: "Enter PayPal Email" },
+                    { id: 'bank', name: 'Bank Transfer (min 50k Points)', minPoints: 50000, feePercent: 0.01, detailsPlaceholder: "Enter Bank Details (Simulated)" },
+                    { id: 'crypto_usdt', name: 'Crypto Stardust (USDT TRC20) (min 20k Points)', minPoints: 20000, feePercent: 0.005, detailsPlaceholder: "Enter USDT TRC20 Address" }
                 ]
             },
 
             // --- State ---
             state: {
                 userId: null,
-                username: 'Player',
-                tokenBalance: 0,
+                username: 'Explorer',
+                pointBalance: 0,
                 energy: {
                     current: 0,
                     max: 0,
                     lastRegenTimestamp: Date.now(),
                 },
-                tapPower: 1, // Base tokens per tap
+                tapPower: 1,
                 energyPerTap: 1,
-                activeBoosts: [], // { id, type, value, expiresAt }
-                boosterUses: {}, // { booster_id: uses_left }
+                activeBoosts: [],
+                boosterUses: {},
                 tasks: {
-                    daily: {}, // { taskId: { completedToday: false, lastCompleted: null } }
-                    partner: {} // { taskId: { completed: false } }
+                    daily: {},
+                    partner: {}
                 },
                 referrals: {
                     myReferralCode: '',
                     referredByCode: null,
                     referredFriendsCount: 0,
-                    referralBonusCollected: false, // For being referred
+                    referralBonusCollected: false,
                 },
-                staking: {
-                    activeStakes: [], // { id, amount, durationDays, interestRate, startDate, claimableDate }
-                    history: [], // { ...stakeDetails, claimedDate, totalReturn }
+                withdrawals: { // New state for withdrawals
+                    history: [], // { id, amountPoints, method, details, timestamp, status: 'Pending' | 'Completed (Simulated)' | 'Failed (Simulated)' }
                 },
                 lastDailyReset: null,
             },
 
             // --- DOM Elements ---
-            elements: {},
+            elements: {}, // Will be cached
 
             // --- Initialization ---
             init() {
-                // Initialize Telegram WebApp
                 Telegram.WebApp.ready();
-                Telegram.WebApp.expand(); // Expand to full height
+                Telegram.WebApp.expand();
 
-                // Cache DOM elements
                 this.cacheDOMElements();
-
-                // Load user data or initialize
                 this.loadData();
-                this.initTelegramUser(); // Set user from Telegram
+                this.initTelegramUser();
 
-                // Setup UI and event listeners
                 this.setupEventListeners();
                 this.updateDisplay();
                 this.startEnergyRegeneration();
                 this.checkDailyReset();
                 this.renderTasks();
-                this.renderStakingOptions();
-                this.renderStakes();
                 this.renderReferralInfo();
+                this.renderWithdrawalOptions();
+                this.renderWithdrawalHistory();
                 this.updateBoosterButtons();
-
-                console.log("WCoinApp Initialized", this.state);
+                
+                console.log("StarSeekApp Initialized", this.state);
             },
 
             cacheDOMElements() {
@@ -635,63 +632,62 @@
                     navButtons: document.querySelectorAll('.nav-button'),
                     sections: document.querySelectorAll('.section'),
                     // Tap
-                    coinContainer: document.getElementById('coin-container'),
+                    starIconContainer: document.getElementById('star-icon-container'),
                     floatingTextContainer: document.getElementById('floating-text-container'),
                     boosterFullEnergyBtn: document.getElementById('booster-full-energy'),
-                    boosterTurboTapBtn: document.getElementById('booster-turbo-tap'),
+                    boosterStarSurgeBtn: document.getElementById('booster-star-surge'),
                     activeBoostersDisplay: document.getElementById('active-boosters-display'),
                     // Tasks
                     taskList: document.getElementById('task-list'),
                     partnerTaskList: document.getElementById('partner-task-list'),
-                    // Mates
+                    // Referrals
                     referralCodeDisplay: document.getElementById('referral-code-display'),
                     referredFriendsCount: document.getElementById('referred-friends-count'),
                     enterReferralCodeInput: document.getElementById('enter-referral-code'),
                     submitReferralCodeButton: document.getElementById('submit-referral-code-button'),
-                    // Staking
-                    stakingForm: document.getElementById('staking-form'),
-                    stakingAmountInput: document.getElementById('staking-amount'),
-                    stakingDurationSelect: document.getElementById('staking-duration'),
-                    activeStakesList: document.getElementById('active-stakes-list'),
-                    stakingHistoryList: document.getElementById('staking-history-list'),
+                    // Withdraw
+                    withdrawForm: document.getElementById('withdraw-form'),
+                    withdrawAmountInput: document.getElementById('withdraw-amount'),
+                    withdrawMethodSelect: document.getElementById('withdraw-method'),
+                    minWithdrawDisplay: document.getElementById('min-withdraw-display'),
+                    feeDisplay: document.getElementById('fee-display'),
+                    withdrawButton: document.getElementById('withdraw-button'),
+                    withdrawalHistoryList: document.getElementById('withdrawal-history-list'),
                 };
             },
             
             initTelegramUser() {
                 const tgUser = Telegram.WebApp.initDataUnsafe.user;
                 if (tgUser) {
-                    if (!this.state.userId) { // Only set if not already loaded (i.e., first time for this user)
-                        this.state.userId = String(tgUser.id);
-                        this.state.username = tgUser.username || `${tgUser.first_name} ${tgUser.last_name || ''}`.trim() || 'Player';
-                        // Generate referral code if new user
-                        if (!this.state.referrals.myReferralCode) {
+                    const currentTgId = String(tgUser.id);
+                    if (!this.state.userId || this.state.userId !== currentTgId) {
+                        // New user or different user logged in on this device/browser
+                        if (this.state.userId && this.state.userId !== currentTgId) {
+                            console.warn("LocalStorage UserID mismatch with Telegram UserID. Resetting data for new TG user.");
+                            localStorage.removeItem(this.CONFIG.STORAGE_KEY); // Clear old data
+                        }
+                        this._setDefaultState(); // Reset state to defaults
+                        this.state.userId = currentTgId;
+                        this.state.username = tgUser.username || `${tgUser.first_name} ${tgUser.last_name || ''}`.trim() || 'Explorer';
+                        if (!this.state.referrals.myReferralCode) { // Generate code if it's truly a new setup
                             this.state.referrals.myReferralCode = this.generateReferralCode(this.state.userId);
                         }
                     } else {
-                        // If userId loaded from storage doesn't match TG, it's a problem or different user on same mock
-                        // For real app, this shouldn't happen often as localStorage is sandboxed per domain
-                        if (this.state.userId !== String(tgUser.id)) {
-                            console.warn("LocalStorage UserID mismatch with Telegram UserID. Resetting data for new TG user.");
-                            localStorage.removeItem(this.CONFIG.STORAGE_KEY); // Clear old data
-                            this._setDefaultState(); // Reset state
-                            this.state.userId = String(tgUser.id); // Set new user ID
-                            this.state.username = tgUser.username || `${tgUser.first_name} ${tgUser.last_name || ''}`.trim() || 'Player';
-                            this.state.referrals.myReferralCode = this.generateReferralCode(this.state.userId);
-                        } else {
-                             // User is the same, update username if it changed in Telegram
-                            this.state.username = tgUser.username || `${tgUser.first_name} ${tgUser.last_name || ''}`.trim() || 'Player';
-                        }
+                        // User is the same, update username if it changed in Telegram
+                        this.state.username = tgUser.username || `${tgUser.first_name} ${tgUser.last_name || ''}`.trim() || 'Explorer';
                     }
+                } else {
+                    // Fallback if no Telegram user data (e.g. strict local testing)
+                    if(!this.state.userId) this._setDefaultState(); // Initialize if completely new
                 }
                 this.saveData();
             },
 
-            // --- Data Management (localStorage) ---
             _setDefaultState() {
                 this.state = {
-                    userId: null, // Will be set by initTelegramUser
-                    username: 'Player',
-                    tokenBalance: this.CONFIG.INITIAL_BALANCE,
+                    userId: null,
+                    username: 'Explorer',
+                    pointBalance: this.CONFIG.INITIAL_POINTS,
                     energy: {
                         current: this.CONFIG.MAX_ENERGY,
                         max: this.CONFIG.MAX_ENERGY,
@@ -702,58 +698,52 @@
                     activeBoosts: [],
                     boosterUses: {
                         [this.CONFIG.BOOSTERS.FULL_ENERGY.id]: this.CONFIG.BOOSTERS.FULL_ENERGY.uses,
-                        [this.CONFIG.BOOSTERS.TURBO_TAP.id]: this.CONFIG.BOOSTERS.TURBO_TAP.uses,
+                        [this.CONFIG.BOOSTERS.STAR_SURGE.id]: this.CONFIG.BOOSTERS.STAR_SURGE.uses,
                     },
-                    tasks: {
-                        daily: {},
-                        partner: {}
-                    },
+                    tasks: { daily: {}, partner: {} },
                     referrals: {
-                        myReferralCode: '', // Will be generated
+                        myReferralCode: this.state.userId ? this.generateReferralCode(this.state.userId) : '', // Generate if userId is available
                         referredByCode: null,
                         referredFriendsCount: 0,
                         referralBonusCollected: false,
                     },
-                    staking: {
-                        activeStakes: [],
-                        history: [],
-                    },
-                    lastDailyReset: new Date().toISOString().split('T')[0], // Today's date string YYYY-MM-DD
+                    withdrawals: { history: [] },
+                    lastDailyReset: new Date().toISOString().split('T')[0],
                 };
-                 // Initialize task states based on CONFIG
+                // Initialize task states
                 this.CONFIG.DAILY_TASKS.forEach(task => {
                     this.state.tasks.daily[task.id] = { completedToday: false, lastCompleted: null };
                 });
                 this.CONFIG.PARTNER_TASKS.forEach(task => {
                     this.state.tasks.partner[task.id] = { completed: false };
                 });
+                 if(this.state.userId && !this.state.referrals.myReferralCode){
+                    this.state.referrals.myReferralCode = this.generateReferralCode(this.state.userId);
+                }
             },
 
             loadData() {
                 const savedData = localStorage.getItem(this.CONFIG.STORAGE_KEY);
                 if (savedData) {
                     const parsedData = JSON.parse(savedData);
-                    // Merge carefully to handle new properties in future versions
-                    this.state = { ...this._getDefaultState(), ...parsedData }; 
-                    
-                    // Ensure nested objects are also merged or default if missing
-                    this.state.energy = { ...this._getDefaultState().energy, ...parsedData.energy };
-                    this.state.tasks = { ...this._getDefaultState().tasks, ...parsedData.tasks };
-                    if (!parsedData.tasks?.daily) this.state.tasks.daily = this._getDefaultState().tasks.daily;
-                    if (!parsedData.tasks?.partner) this.state.tasks.partner = this._getDefaultState().tasks.partner;
-                    
-                    this.state.referrals = { ...this._getDefaultState().referrals, ...parsedData.referrals };
-                    this.state.staking = { ...this._getDefaultState().staking, ...parsedData.staking };
-                    
-                    // Ensure boosterUses has all boosters from config
-                    for (const boosterKey in this.CONFIG.BOOSTERS) {
-                        const booster = this.CONFIG.BOOSTERS[boosterKey];
-                        if (this.state.boosterUses[booster.id] === undefined) {
-                            this.state.boosterUses[booster.id] = booster.uses;
-                        }
-                    }
-                    // Validate tasks structure
-                    this.CONFIG.DAILY_TASKS.forEach(task => {
+                    // Deep merge helper or manual merge for nested objects
+                    const defaultState = this._getDefaultState(); // Get a fresh default state
+                    this.state = { ...defaultState, ...parsedData };
+                    this.state.energy = { ...defaultState.energy, ...parsedData.energy };
+                    this.state.tasks = {
+                        daily: { ...defaultState.tasks.daily, ...(parsedData.tasks ? parsedData.tasks.daily : {}) },
+                        partner: { ...defaultState.tasks.partner, ...(parsedData.tasks ? parsedData.tasks.partner : {}) }
+                    };
+                    this.state.referrals = { ...defaultState.referrals, ...parsedData.referrals };
+                    this.state.withdrawals = { ...defaultState.withdrawals, ...parsedData.withdrawals };
+                    this.state.boosterUses = {...defaultState.boosterUses, ...parsedData.boosterUses};
+
+                    // Ensure all boosters from config exist in state.boosterUses
+                    Object.values(this.CONFIG.BOOSTERS).forEach(b => {
+                        if(this.state.boosterUses[b.id] === undefined) this.state.boosterUses[b.id] = b.uses;
+                    });
+                    // Ensure all tasks from config exist
+                     this.CONFIG.DAILY_TASKS.forEach(task => {
                         if (!this.state.tasks.daily[task.id]) {
                             this.state.tasks.daily[task.id] = { completedToday: false, lastCompleted: null };
                         }
@@ -764,11 +754,9 @@
                         }
                     });
 
-
                 } else {
                     this._setDefaultState();
                 }
-                // Ensure lastRegenTimestamp is a number
                 this.state.energy.lastRegenTimestamp = Number(this.state.energy.lastRegenTimestamp) || Date.now();
             },
 
@@ -779,7 +767,7 @@
             // --- UI Updates ---
             updateDisplay() {
                 this.elements.usernameDisplay.textContent = this.state.username;
-                this.elements.balanceDisplay.textContent = Math.floor(this.state.tokenBalance);
+                this.elements.balanceDisplay.textContent = `${Math.floor(this.state.pointBalance)} Points`;
                 
                 const energyPercentage = (this.state.energy.current / this.state.energy.max) * 100;
                 this.elements.energyDisplay.textContent = `${Math.floor(this.state.energy.current)}/${this.state.energy.max}`;
@@ -787,8 +775,9 @@
 
                 this.updateActiveBoostsDisplay();
             },
-            
+
             updateActiveBoostsDisplay() {
+                // (Similar to WCoinApp, just ensure IDs match if they changed)
                 let displayHTML = "";
                 this.state.activeBoosts.forEach(boost => {
                     const timeLeft = Math.ceil((boost.expiresAt - Date.now()) / 1000);
@@ -798,15 +787,14 @@
                 });
                 this.elements.activeBoostersDisplay.innerHTML = displayHTML || "No active boosts.";
             },
-
-            showNotification(message, type = 'info', duration = 3000) { // type can be 'info', 'success', 'error'
+            
+            showNotification(message, type = 'info', duration = 3000) {
                 const notification = document.createElement('div');
-                notification.className = `notification ${type}`;
+                notification.className = `notification ${type}`; // e.g. 'notification success'
                 notification.textContent = message;
                 
                 this.elements.notificationArea.appendChild(notification);
                 
-                // Trigger reflow to enable transition
                 requestAnimationFrame(() => {
                     notification.classList.add('show');
                 });
@@ -817,48 +805,47 @@
                         if (notification.parentNode) {
                            notification.parentNode.removeChild(notification);
                         }
-                    }, 500); // Wait for fade out transition
+                    }, 500);
                 }, duration);
             },
 
             // --- Event Listeners ---
             setupEventListeners() {
-                // Navigation
                 this.elements.navButtons.forEach(button => {
                     button.addEventListener('click', () => this.switchTab(button.dataset.tab));
                 });
 
-                // Tap Coin
-                this.elements.coinContainer.addEventListener('click', () => this.handleTap());
-                // For better mobile responsiveness for :active styles
-                this.elements.coinContainer.addEventListener('touchstart', () => {}, {passive: true});
+                this.elements.starIconContainer.addEventListener('click', () => this.handleTap());
+                this.elements.starIconContainer.addEventListener('touchstart', () => {}, {passive: true});
 
-
-                // Boosters
                 this.elements.boosterFullEnergyBtn.addEventListener('click', () => this.activateBooster('FULL_ENERGY'));
-                this.elements.boosterTurboTapBtn.addEventListener('click', () => this.activateBooster('TURBO_TAP'));
+                this.elements.boosterStarSurgeBtn.addEventListener('click', () => this.activateBooster('STAR_SURGE'));
 
-                // Mates
                 this.elements.submitReferralCodeButton.addEventListener('click', () => this.submitReferralCode());
                 this.elements.referralCodeDisplay.addEventListener('click', () => this.copyReferralCode());
 
-                // Staking
-                this.elements.stakingForm.addEventListener('submit', (e) => {
+                this.elements.withdrawForm.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    this.handleStake();
+                    this.handleWithdrawRequest();
                 });
+                this.elements.withdrawMethodSelect.addEventListener('change', () => this.updateWithdrawalFeeAndMinDisplay());
             },
 
             // --- Navigation ---
             switchTab(tabId) {
+                // (Same as WCoinApp)
                 this.elements.sections.forEach(section => section.classList.remove('active'));
                 this.elements.navButtons.forEach(button => button.classList.remove('active'));
 
                 document.getElementById(tabId).classList.add('active');
                 document.querySelector(`.nav-button[data-tab="${tabId}"]`).classList.add('active');
-            },
 
-            // --- Tap Section Logic ---
+                if(tabId === 'withdraw-section') {
+                    this.updateWithdrawalFeeAndMinDisplay(); // Update display when tab is shown
+                }
+            },
+            
+            // --- Tap Section Logic (largely same as WCoinApp, renamed vars) ---
             handleTap() {
                 if (this.state.energy.current < this.state.energyPerTap) {
                     this.showNotification("Not enough energy!", "error");
@@ -869,9 +856,9 @@
                 if (this.state.energy.current < 0) this.state.energy.current = 0;
 
                 const earnedAmount = this.state.tapPower;
-                this.state.tokenBalance += earnedAmount;
+                this.state.pointBalance += earnedAmount;
                 
-                this.createFloatingText(`+${earnedAmount.toFixed(1)}`);
+                this.createFloatingText(`+${earnedAmount.toFixed(1)}`); // Use the star icon's container
                 this.updateDisplay();
                 this.saveData();
             },
@@ -881,26 +868,23 @@
                 floatText.className = 'floating-text';
                 floatText.textContent = text;
                 
-                // Position randomly near the coin
-                const coinRect = this.elements.coinContainer.getBoundingClientRect();
+                const iconRect = this.elements.starIconContainer.getBoundingClientRect();
                 const appRect = this.elements.floatingTextContainer.getBoundingClientRect();
 
-                const x = coinRect.left - appRect.left + (coinRect.width / 2) + (Math.random() * 60 - 30); // Center of coin + random offset
-                const y = coinRect.top - appRect.top + (coinRect.height / 2) + (Math.random() * 40 - 20); // Center of coin + random offset
+                const x = iconRect.left - appRect.left + (iconRect.width / 2) + (Math.random() * 60 - 30);
+                const y = iconRect.top - appRect.top + (iconRect.height / 3) + (Math.random() * 40 - 20); // Start a bit higher on star
 
                 floatText.style.left = `${x}px`;
                 floatText.style.top = `${y}px`;
 
                 this.elements.floatingTextContainer.appendChild(floatText);
                 setTimeout(() => {
-                    if (floatText.parentNode) {
-                        floatText.parentNode.removeChild(floatText);
-                    }
-                }, 1500); // Match animation duration
+                    if (floatText.parentNode) floatText.parentNode.removeChild(floatText);
+                }, 1500);
             },
 
-            startEnergyRegeneration() {
-                setInterval(() => {
+            startEnergyRegeneration() { /* (Same as WCoinApp) */ 
+                 setInterval(() => {
                     const now = Date.now();
                     const elapsedSeconds = (now - this.state.energy.lastRegenTimestamp) / 1000;
                     
@@ -913,25 +897,24 @@
                     }
                     this.state.energy.lastRegenTimestamp = now;
                     this.updateDisplay();
-                    this.saveData(); // Save frequently for energy
+                    // Save less frequently for energy if performance becomes an issue
+                    // For now, saving on each tick is fine for this scale.
+                    this.saveData(); 
                 }, this.CONFIG.ENERGY_REGEN_INTERVAL);
             },
 
-            activateBooster(boosterKey) {
+            activateBooster(boosterKey) { /* (Similar to WCoinApp, check booster IDs match config) */
                 const boosterConfig = this.CONFIG.BOOSTERS[boosterKey];
                 if (!boosterConfig) {
                     this.showNotification("Booster not found!", "error");
                     return;
                 }
-
                 if (this.state.boosterUses[boosterConfig.id] <= 0) {
                     this.showNotification(`${boosterConfig.name} booster has no uses left.`, "error");
                     return;
                 }
-
-                // Check if a similar boost is already active (e.g., don't stack turbo taps)
-                if (boosterConfig.id === 'turbo_tap' && this.state.activeBoosts.some(b => b.id === 'turbo_tap')) {
-                     this.showNotification("Turbo Tap is already active!", "error");
+                 if (boosterConfig.id === 'star_surge' && this.state.activeBoosts.some(b => b.id === 'star_surge')) {
+                     this.showNotification("Star Surge is already active!", "error");
                      return;
                 }
 
@@ -940,7 +923,7 @@
                 if (boosterConfig.id === 'full_energy') {
                     this.state.energy.current = this.state.energy.max;
                     this.showNotification("Energy refilled!", "success");
-                } else if (boosterConfig.id === 'turbo_tap') {
+                } else if (boosterConfig.id === 'star_surge') {
                     const expiresAt = Date.now() + boosterConfig.duration_ms;
                     this.state.activeBoosts.push({ 
                         id: boosterConfig.id, 
@@ -951,75 +934,61 @@
                     });
                     this.state.tapPower *= boosterConfig.multiplier;
                     this.showNotification(`${boosterConfig.name} activated! Tap power x${boosterConfig.multiplier}.`, "success");
-
                     setTimeout(() => this.deactivateBooster(boosterConfig.id, expiresAt), boosterConfig.duration_ms);
                 }
-                // Add more booster types here (e.g., energy_saver)
-
                 this.updateBoosterButtons();
                 this.updateDisplay();
                 this.saveData();
             },
-            
-            deactivateBooster(boosterId, originalExpiryTime) {
-                 // Find the specific boost instance that is expiring
+            deactivateBooster(boosterId, originalExpiryTime) { /* (Same as WCoinApp) */
                 const boostIndex = this.state.activeBoosts.findIndex(b => b.id === boosterId && b.expiresAt === originalExpiryTime);
-                if (boostIndex === -1) return; // Already removed or different instance
+                if (boostIndex === -1) return; 
 
                 const boost = this.state.activeBoosts[boostIndex];
-
                 if (boost.type === 'tap_multiplier') {
                     this.state.tapPower /= boost.multiplier;
                     if (this.state.tapPower < this.CONFIG.TAP_BASE_REWARD) this.state.tapPower = this.CONFIG.TAP_BASE_REWARD;
                 }
-                // Handle other boost types for deactivation
-
                 this.state.activeBoosts.splice(boostIndex, 1);
                 this.showNotification(`${boost.name} expired.`, "info");
                 this.updateDisplay();
                 this.saveData();
             },
-
-            updateBoosterButtons() {
+            updateBoosterButtons() { /* (Same as WCoinApp, check booster IDs) */
                 this.elements.boosterFullEnergyBtn.textContent = `⚡ Full Energy (${this.state.boosterUses[this.CONFIG.BOOSTERS.FULL_ENERGY.id] || 0})`;
-                this.elements.boosterTurboTapBtn.textContent = `🚀 Turbo Tap (x3) (${this.state.boosterUses[this.CONFIG.BOOSTERS.TURBO_TAP.id] || 0})`;
-
+                this.elements.boosterStarSurgeBtn.textContent = `🚀 Star Surge (x3) (${this.state.boosterUses[this.CONFIG.BOOSTERS.STAR_SURGE.id] || 0})`;
                 this.elements.boosterFullEnergyBtn.disabled = (this.state.boosterUses[this.CONFIG.BOOSTERS.FULL_ENERGY.id] || 0) <= 0;
-                this.elements.boosterTurboTapBtn.disabled = (this.state.boosterUses[this.CONFIG.BOOSTERS.TURBO_TAP.id] || 0) <= 0 || this.state.activeBoosts.some(b => b.id === 'turbo_tap');
+                this.elements.boosterStarSurgeBtn.disabled = (this.state.boosterUses[this.CONFIG.BOOSTERS.STAR_SURGE.id] || 0) <= 0 || this.state.activeBoosts.some(b => b.id === 'star_surge');
             },
 
-            // --- Tasks Section Logic ---
-            checkDailyReset() {
+            // --- Tasks Section Logic (largely same as WCoinApp) ---
+            checkDailyReset() { /* (Same as WCoinApp) */
                 const todayDateStr = new Date().toISOString().split('T')[0];
                 if (this.state.lastDailyReset !== todayDateStr) {
                     console.log("Performing daily reset for tasks.");
                     Object.keys(this.state.tasks.daily).forEach(taskId => {
                         this.state.tasks.daily[taskId].completedToday = false;
                     });
-                    // Reset daily booster uses (if any were configured to reset daily)
-                    // For now, boosters are one-time or earned.
                     this.state.lastDailyReset = todayDateStr;
                     this.saveData();
-                    this.renderTasks(); // Re-render tasks to reflect reset
-                    this.showNotification("Daily tasks have been reset!", "info");
+                    this.renderTasks();
+                    this.showNotification("Daily missions have been reset!", "info");
                 }
             },
+            renderTasks() { /* (Same as WCoinApp, adapt class names if needed) */
+                this.elements.taskList.innerHTML = '';
+                this.elements.partnerTaskList.innerHTML = '';
 
-            renderTasks() {
-                this.elements.taskList.innerHTML = ''; // Clear daily tasks
-                this.elements.partnerTaskList.innerHTML = ''; // Clear partner tasks
-
-                // Daily Tasks
                 this.CONFIG.DAILY_TASKS.forEach(task => {
                     const taskState = this.state.tasks.daily[task.id] || { completedToday: false };
                     const li = document.createElement('li');
-                    li.className = 'task-item';
+                    li.className = 'list-item'; // Use generic class
                     li.innerHTML = `
-                        <div class="task-info">
+                        <div class="item-info">
                             <p><strong>${task.icon} ${task.name}</strong></p>
-                            <p class="task-reward">Reward: ${task.reward} WTC</p>
+                            <p class="item-reward">Reward: ${task.reward} Points</p>
                         </div>
-                        <div class="task-actions">
+                        <div class="item-actions">
                             <button data-task-id="${task.id}" data-task-type="daily" ${taskState.completedToday ? 'disabled' : ''}>
                                 ${taskState.completedToday ? 'Completed' : 'Claim'}
                             </button>
@@ -1028,317 +997,224 @@
                     this.elements.taskList.appendChild(li);
                 });
 
-                // Partner Tasks (One-time completion)
                  this.CONFIG.PARTNER_TASKS.forEach(task => {
                     const taskState = this.state.tasks.partner[task.id] || { completed: false };
                     const li = document.createElement('li');
-                    li.className = 'task-item';
+                    li.className = 'list-item'; // Use generic class
                     li.innerHTML = `
-                        <div class="task-info">
+                        <div class="item-info">
                             <p><strong>${task.icon} ${task.name}</strong></p>
-                            <p class="task-reward">Reward: ${task.reward} WTC</p>
+                            <p class="item-reward">Reward: ${task.reward} Points</p>
                         </div>
-                        <div class="task-actions">
-                            <button data-task-id="${task.id}" data-task-type="partner" ${taskState.completed ? 'disabled' : ''} ${task.link ? `onclick="window.open('${task.link}', '_blank')"` : ''}>
-                                ${taskState.completed ? 'Completed' : 'Claim'}
+                        <div class="item-actions">
+                            <button data-task-id="${task.id}" data-task-type="partner" ${taskState.completed ? 'disabled' : ''} ${task.link ? `onclick="window.open('${task.link}', '_blank'); StarSeekApp.completeTask('${task.id}', 'partner', true);"` : ''}>
+                                ${taskState.completed ? 'Completed' : (task.link ? 'Visit & Claim' : 'Claim')}
                             </button>
                         </div>
                     `;
                     this.elements.partnerTaskList.appendChild(li);
                 });
 
-
-                // Add event listeners to new buttons
                 this.elements.taskList.querySelectorAll('button').forEach(button => {
                     button.addEventListener('click', (e) => this.completeTask(e.target.dataset.taskId, e.target.dataset.taskType));
                 });
-                this.elements.partnerTaskList.querySelectorAll('button').forEach(button => {
-                     button.addEventListener('click', (e) => {
-                        // For partner tasks, opening link is separate from claiming.
-                        // We'll claim immediately if not linked, or assume they did the action if linked.
-                        if (!taskState.completed) {
-                            this.completeTask(e.target.dataset.taskId, e.target.dataset.taskType);
-                        }
-                    });
+                this.elements.partnerTaskList.querySelectorAll('button:not([onclick])').forEach(button => { // Only for non-link buttons
+                     button.addEventListener('click', (e) => this.completeTask(e.target.dataset.taskId, e.target.dataset.taskType));
                 });
             },
-
-            completeTask(taskId, taskType) {
+            completeTask(taskId, taskType, isLinkClick = false) { /* (Same as WCoinApp) */
                 let task, taskStateRef;
-
                 if (taskType === 'daily') {
                     task = this.CONFIG.DAILY_TASKS.find(t => t.id === taskId);
                     taskStateRef = this.state.tasks.daily[taskId];
                     if (task && taskStateRef && !taskStateRef.completedToday) {
                         taskStateRef.completedToday = true;
                         taskStateRef.lastCompleted = new Date().toISOString();
-                        this.state.tokenBalance += task.reward;
-                        if (task.action) task.action(); // Perform specific action if defined
-                        else this.showNotification(`Task "${task.name}" completed! +${task.reward} WTC`, "success");
-                    }
+                        this.state.pointBalance += task.reward;
+                        if (task.action) task.action();
+                        else this.showNotification(`Mission "${task.name}" complete! +${task.reward} Points`, "success");
+                    } else return; // Already completed or invalid
                 } else if (taskType === 'partner') {
                     task = this.CONFIG.PARTNER_TASKS.find(t => t.id === taskId);
                     taskStateRef = this.state.tasks.partner[taskId];
                      if (task && taskStateRef && !taskStateRef.completed) {
-                        taskStateRef.completed = true;
-                        this.state.tokenBalance += task.reward;
-                        // For partner tasks, the button itself might open a link.
-                        // The action here is mainly to give reward.
-                        this.showNotification(`Task "${task.name}" completed! +${task.reward} WTC`, "success");
-                    }
-                } else {
-                    return; // Unknown task type
-                }
+                        taskStateRef.completed = true; // Mark as completed
+                        this.state.pointBalance += task.reward;
+                        this.showNotification(`Mission "${task.name}" complete! +${task.reward} Points`, "success");
+                    } else return; // Already completed or invalid
+                } else { return; }
 
                 this.updateDisplay();
-                this.renderTasks(); // Re-render to update button states
+                this.renderTasks();
                 this.saveData();
             },
 
-            // --- Mates Section Logic ---
-            generateReferralCode(userId) {
-                // Simple code based on user ID, can be made more complex
-                return `WCRF${userId.slice(-5)}${Math.random().toString(36).substring(2, 5).toUpperCase()}`;
-            },
-
-            renderReferralInfo() {
+            // --- Referrals Section Logic (largely same as WCoinApp) ---
+            generateReferralCode(userId) { return `STAR${userId.slice(-4)}${Math.random().toString(36).substring(2, 6).toUpperCase()}`; },
+            renderReferralInfo() { /* (Same as WCoinApp) */
                 this.elements.referralCodeDisplay.textContent = this.state.referrals.myReferralCode || 'Generating...';
                 this.elements.referredFriendsCount.textContent = this.state.referrals.referredFriendsCount;
-                this.elements.enterReferralCodeInput.disabled = !!this.state.referrals.referredByCode; // Disable if already referred
+                this.elements.enterReferralCodeInput.disabled = !!this.state.referrals.referredByCode;
                 this.elements.submitReferralCodeButton.disabled = !!this.state.referrals.referredByCode;
                 if (this.state.referrals.referredByCode) {
-                    this.elements.enterReferralCodeInput.placeholder = "Referral code applied";
+                    this.elements.enterReferralCodeInput.placeholder = "Invite code applied";
                 }
             },
-
-            copyReferralCode() {
+            copyReferralCode() { /* (Same as WCoinApp) */
                 const code = this.state.referrals.myReferralCode;
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText(code).then(() => {
-                        this.showNotification("Referral code copied!", "success");
-                    }).catch(err => {
-                        this.showNotification("Failed to copy code.", "error");
-                        console.error('Failed to copy: ', err);
-                    });
-                } else {
-                    // Fallback for browsers that don't support navigator.clipboard
-                    this.showNotification("Tap and hold to copy code manually.", "info");
-                }
+                        this.showNotification("Invite code copied!", "success");
+                    }).catch(err => { this.showNotification("Failed to copy code.", "error"); });
+                } else { this.showNotification("Tap and hold to copy code manually.", "info"); }
             },
-
-            submitReferralCode() {
+            submitReferralCode() { /* (Same as WCoinApp) */
                 const enteredCode = this.elements.enterReferralCodeInput.value.trim();
-                if (!enteredCode) {
-                    this.showNotification("Please enter a referral code.", "error");
-                    return;
-                }
-                if (this.state.referrals.referredByCode) {
-                    this.showNotification("You have already used a referral code.", "info");
-                    return;
-                }
-                if (enteredCode === this.state.referrals.myReferralCode) {
-                    this.showNotification("You cannot refer yourself.", "error");
-                    return;
-                }
+                if (!enteredCode) { this.showNotification("Please enter an invite code.", "error"); return; }
+                if (this.state.referrals.referredByCode) { this.showNotification("You have already used an invite code.", "info"); return; }
+                if (enteredCode === this.state.referrals.myReferralCode) { this.showNotification("You cannot invite yourself.", "error"); return; }
 
-                // --- SIMULATION ---
-                // In a real app, this would be a server call to validate the code and link users.
-                // Here, we'll just assume the code is valid (but not from self).
                 this.state.referrals.referredByCode = enteredCode;
-                this.state.referrals.referralBonusCollected = true; // Mark as collected for the referred
-                this.state.tokenBalance += this.CONFIG.REFERRAL_BONUS_REFERRED;
-                // The referrer would get their bonus when this user (the referred) performs an action.
-                // We can't easily simulate the referrer's side in localStorage only.
-                // We'll just increment the current user's "referred by" status.
-                
-                this.showNotification(`Referral code applied! +${this.CONFIG.REFERRAL_BONUS_REFERRED} WTC.`, "success");
-                // If we want to simulate referrer getting bonus, we would need a way for this app instance
-                // to know it's running *as the referrer* and check if any of their referred users just "signed up".
-                // This is beyond simple localStorage.
-                // For simplicity, we'll just count that the current user got referred.
-                // The referrer's `referredFriendsCount` would be incremented on THEIR device if they were the referrer.
-                // This part is tricky. Let's assume a referrer *would* get a bonus.
-                // The 'Mates' section would list *your* referrals.
-                // So, if *another user* used YOUR code, your `referredFriendsCount` would increase.
-                // We are the user *entering* a code.
-
-                this.renderReferralInfo();
-                this.updateDisplay();
-                this.saveData();
+                this.state.referrals.referralBonusCollected = true;
+                this.state.pointBalance += this.CONFIG.REFERRAL_BONUS_REFERRED;
+                this.showNotification(`Invite code applied! +${this.CONFIG.REFERRAL_BONUS_REFERRED} Points.`, "success");
+                this.renderReferralInfo(); this.updateDisplay(); this.saveData();
             },
-            // This function would be called if another user successfully used *our* code.
-            // This is hard to simulate fully. For now, we just track `referredFriendsCount`.
-            // Let's add a task for "Refer a friend" - completing it gives bonus and incrs count.
-            // This is a simplification. Real referral needs backend.
-            incrementReferralCount() { // Called when WE successfully refer someone (simulated)
+            incrementReferralCount() { /* (Same as WCoinApp) - conceptual for demo */
                 this.state.referrals.referredFriendsCount++;
-                this.state.tokenBalance += this.CONFIG.REFERRAL_BONUS_REFERRER;
-                this.showNotification(`You referred a friend! +${this.CONFIG.REFERRAL_BONUS_REFERRER} WTC.`, "success");
-                this.renderReferralInfo();
-                this.updateDisplay();
-                this.saveData();
+                this.state.pointBalance += this.CONFIG.REFERRAL_BONUS_REFERRER;
+                this.showNotification(`You recruited an explorer! +${this.CONFIG.REFERRAL_BONUS_REFERRER} Points.`, "success");
+                this.renderReferralInfo(); this.updateDisplay(); this.saveData();
             },
 
-
-            // --- Staking Section Logic ---
-            renderStakingOptions() {
-                this.elements.stakingDurationSelect.innerHTML = '';
-                this.CONFIG.STAKING_OPTIONS.forEach(option => {
+            // --- Withdraw Section Logic (NEW) ---
+            renderWithdrawalOptions() {
+                this.elements.withdrawMethodSelect.innerHTML = '';
+                this.CONFIG.WITHDRAWAL_OPTIONS.forEach(option => {
                     const optElement = document.createElement('option');
-                    optElement.value = option.durationDays;
-                    optElement.textContent = `${option.durationDays} days (${option.interestRate * 100}% interest)`;
-                    this.elements.stakingDurationSelect.appendChild(optElement);
+                    optElement.value = option.id;
+                    optElement.textContent = option.name;
+                    this.elements.withdrawMethodSelect.appendChild(optElement);
                 });
+                this.updateWithdrawalFeeAndMinDisplay(); // Initial call
             },
 
-            handleStake() {
-                const amount = parseInt(this.elements.stakingAmountInput.value, 10);
-                const durationDays = parseInt(this.elements.stakingDurationSelect.value, 10);
+            updateWithdrawalFeeAndMinDisplay() {
+                const selectedMethodId = this.elements.withdrawMethodSelect.value;
+                const selectedOption = this.CONFIG.WITHDRAWAL_OPTIONS.find(opt => opt.id === selectedMethodId);
+                if (selectedOption) {
+                    this.elements.minWithdrawDisplay.textContent = `Minimum for this method: ${selectedOption.minPoints} Points.`;
+                    this.elements.feeDisplay.textContent = `Simulated Fee: ${(selectedOption.feePercent * 100).toFixed(1)}%.`;
+                     this.elements.withdrawAmountInput.placeholder = `Min ${selectedOption.minPoints} Points`;
+                } else {
+                    this.elements.minWithdrawDisplay.textContent = '';
+                    this.elements.feeDisplay.textContent = '';
+                }
+            },
 
-                if (isNaN(amount) || amount < 100) {
-                    this.showNotification("Minimum staking amount is 100 WTC.", "error");
+            handleWithdrawRequest() {
+                const amount = parseInt(this.elements.withdrawAmountInput.value, 10);
+                const methodId = this.elements.withdrawMethodSelect.value;
+                const selectedOption = this.CONFIG.WITHDRAWAL_OPTIONS.find(opt => opt.id === methodId);
+
+                if (!selectedOption) {
+                    this.showNotification("Invalid withdrawal method selected.", "error");
                     return;
                 }
-                if (amount > this.state.tokenBalance) {
-                    this.showNotification("Not enough balance to stake.", "error");
+                if (isNaN(amount) || amount <= 0) {
+                    this.showNotification("Please enter a valid amount.", "error");
+                    return;
+                }
+                if (amount < selectedOption.minPoints) {
+                    this.showNotification(`Minimum withdrawal for ${selectedOption.name} is ${selectedOption.minPoints} Points.`, "error");
+                    return;
+                }
+                 if (amount < this.CONFIG.MIN_WITHDRAWAL_POINTS_GLOBAL) { // General check
+                    this.showNotification(`Global minimum withdrawal is ${this.CONFIG.MIN_WITHDRAWAL_POINTS_GLOBAL} Points.`, "error");
+                    return;
+                }
+                if (amount > this.state.pointBalance) {
+                    this.showNotification("Not enough points to withdraw.", "error");
                     return;
                 }
 
-                const stakingOption = this.CONFIG.STAKING_OPTIONS.find(opt => opt.durationDays === durationDays);
-                if (!stakingOption) {
-                    this.showNotification("Invalid staking duration.", "error");
+                // Simulate fee deduction
+                const feeAmount = Math.floor(amount * selectedOption.feePercent);
+                const amountAfterFee = amount - feeAmount;
+
+                // For simulation, we can ask for "details" like PayPal email or crypto address
+                // In a real app, this would be handled more securely.
+                const withdrawalDetails = prompt(`(Simulation) Enter details for ${selectedOption.name} (e.g., ${selectedOption.detailsPlaceholder}):`, "");
+                if (withdrawalDetails === null) { // User cancelled prompt
+                    this.showNotification("Withdrawal cancelled.", "info");
+                    return;
+                }
+                if (!withdrawalDetails.trim()) {
+                     this.showNotification("Withdrawal details cannot be empty.", "error");
                     return;
                 }
 
-                const stakeId = `stake_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-                const startDate = Date.now();
-                const claimableDate = startDate + (durationDays * 24 * 60 * 60 * 1000);
 
-                const newStake = {
-                    id: stakeId,
-                    amount: amount,
-                    durationDays: durationDays,
-                    interestRate: stakingOption.interestRate,
-                    startDate: startDate,
-                    claimableDate: claimableDate,
+                const newWithdrawal = {
+                    id: `wd_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+                    amountPoints: amount, // Store original amount before fee
+                    amountDeducted: amount, // Points deducted from balance
+                    amountNet: amountAfterFee, // Conceptual net amount after fee
+                    method: selectedOption.name,
+                    details: withdrawalDetails, // Store the provided details (SIMULATED)
+                    timestamp: Date.now(),
+                    status: 'Pending (Simulated)' // All withdrawals will be pending in simulation
                 };
 
-                this.state.staking.activeStakes.push(newStake);
-                this.state.tokenBalance -= amount;
+                this.state.withdrawals.history.push(newWithdrawal);
+                this.state.pointBalance -= amount; // Deduct the gross amount
 
-                this.showNotification(`Successfully staked ${amount} WTC for ${durationDays} days.`, "success");
-                this.elements.stakingAmountInput.value = '';
+                this.showNotification(`Withdrawal request for ${amount} Points (${selectedOption.name}) submitted (Simulated). Fee: ${feeAmount} Points.`, "success");
+                this.elements.withdrawAmountInput.value = '';
                 this.updateDisplay();
-                this.renderStakes();
+                this.renderWithdrawalHistory();
                 this.saveData();
             },
 
-            renderStakes() {
-                this.elements.activeStakesList.innerHTML = '';
-                this.elements.stakingHistoryList.innerHTML = '';
-                const now = Date.now();
-
-                this.state.staking.activeStakes.forEach(stake => {
+            renderWithdrawalHistory() {
+                this.elements.withdrawalHistoryList.innerHTML = '';
+                if (this.state.withdrawals.history.length === 0) {
                     const li = document.createElement('li');
-                    li.className = 'staked-item';
-                    const interestEarned = stake.amount * stake.interestRate;
-                    const timeElapsed = now - stake.startDate;
-                    const totalDuration = stake.claimableDate - stake.startDate;
-                    const progress = Math.min(100, (timeElapsed / totalDuration) * 100);
+                    li.className = 'list-item';
+                    li.innerHTML = `<div class="item-info"><p>No withdrawal history yet.</p></div>`;
+                    this.elements.withdrawalHistoryList.appendChild(li);
+                    return;
+                }
 
+                // Sort by newest first
+                const sortedHistory = [...this.state.withdrawals.history].sort((a, b) => b.timestamp - a.timestamp);
+
+                sortedHistory.forEach(tx => {
+                    const li = document.createElement('li');
+                    li.className = 'list-item';
+                    const statusClass = `transaction-status-${tx.status.split(' ')[0]}`; // e.g. transaction-status-Pending
                     li.innerHTML = `
-                        <div class="staked-info">
-                            <p><strong>Amount:</strong> ${stake.amount} WTC</p>
-                            <p><strong>Duration:</strong> ${stake.durationDays} days</p>
-                            <p><strong>Est. Interest:</strong> <span class="staked-reward">${interestEarned.toFixed(2)} WTC</span></p>
-                            <p><strong>Claimable On:</strong> ${new Date(stake.claimableDate).toLocaleDateString()}</p>
-                            <div class="progress-bar-container mt-1">
-                                <div class="progress-bar" style="width: ${progress.toFixed(2)}%;"></div>
-                            </div>
-                        </div>
-                        <div class="staking-actions">
-                            <button data-stake-id="${stake.id}" ${now < stake.claimableDate ? 'disabled' : ''}>
-                                ${now < stake.claimableDate ? 'Staking' : 'Claim'}
-                            </button>
+                        <div class="item-info">
+                            <p><strong>Amount:</strong> ${tx.amountPoints} Points</p>
+                            <p><strong>Method:</strong> ${tx.method}</p>
+                            <p><strong>Details:</strong> ${this.sanitizeHTML(tx.details)}</p>
+                            <p><strong>Date:</strong> ${new Date(tx.timestamp).toLocaleString()}</p>
+                            <p><strong>Status:</strong> <span class="${statusClass}">${tx.status}</span></p>
                         </div>
                     `;
-                    this.elements.activeStakesList.appendChild(li);
+                    this.elements.withdrawalHistoryList.appendChild(li);
                 });
-                
-                this.state.staking.history.forEach(stake => {
-                    const li = document.createElement('li');
-                    li.className = 'staked-item';
-                     li.innerHTML = `
-                        <div class="staked-info">
-                            <p><strong>Amount:</strong> ${stake.amount} WTC (Claimed)</p>
-                            <p><strong>Duration:</strong> ${stake.durationDays} days</p>
-                            <p><strong>Total Return:</strong> <span class="staked-reward">${stake.totalReturn.toFixed(2)} WTC</span></p>
-                            <p><strong>Claimed On:</strong> ${new Date(stake.claimedDate).toLocaleDateString()}</p>
-                        </div>
-                    `;
-                    this.elements.stakingHistoryList.appendChild(li);
-                });
-
-                // Add event listeners for claim buttons
-                this.elements.activeStakesList.querySelectorAll('button').forEach(button => {
-                    button.addEventListener('click', (e) => this.claimStake(e.target.dataset.stakeId));
-                });
-                 // Check for auto-claimable stakes periodically (e.g. on tab switch or app load)
-                this.checkAutoClaimableStakes();
             },
-            
-            checkAutoClaimableStakes() { // A simple check, could be more robust
-                const now = Date.now();
-                let stakesUpdated = false;
-                this.state.staking.activeStakes.forEach(stake => {
-                    if (now >= stake.claimableDate) {
-                        // Could auto-claim or just enable the button. For now, just enables button.
-                        // If we wanted to auto-claim, call this.claimStake(stake.id) here.
-                        // For now, renderStakes handles the button state.
-                        stakesUpdated = true;
-                    }
-                });
-                if (stakesUpdated) {
-                    this.renderStakes(); // Re-render if any stake became claimable
-                }
-            },
-
-            claimStake(stakeId) {
-                const stakeIndex = this.state.staking.activeStakes.findIndex(s => s.id === stakeId);
-                if (stakeIndex === -1) {
-                    this.showNotification("Stake not found.", "error");
-                    return;
-                }
-
-                const stake = this.state.staking.activeStakes[stakeIndex];
-                if (Date.now() < stake.claimableDate) {
-                    this.showNotification("Stake is not yet claimable.", "info");
-                    return;
-                }
-
-                const interestEarned = stake.amount * stake.interestRate;
-                const totalReturn = stake.amount + interestEarned;
-
-                this.state.tokenBalance += totalReturn;
-                
-                const completedStake = {
-                    ...stake,
-                    claimedDate: Date.now(),
-                    totalReturn: totalReturn
-                };
-                this.state.staking.history.push(completedStake);
-                this.state.staking.activeStakes.splice(stakeIndex, 1);
-
-                this.showNotification(`Claimed ${totalReturn.toFixed(2)} WTC from stake.`, "success");
-                this.updateDisplay();
-                this.renderStakes();
-                this.saveData();
-            },
+            sanitizeHTML(str) { // Basic sanitizer to prevent XSS from user input in details
+                const temp = document.createElement('div');
+                temp.textContent = str;
+                return temp.innerHTML;
+            }
         };
 
         // --- Initialize the App ---
         document.addEventListener('DOMContentLoaded', () => {
-            WCoinApp.init();
+            StarSeekApp.init();
         });
 
     </script>
