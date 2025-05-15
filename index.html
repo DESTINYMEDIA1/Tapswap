@@ -557,8 +557,8 @@
                 profileUsernameEl.textContent = userData.telegramUser;
                 profileJoinDateEl.textContent = new Date(userData.joiningDate).toLocaleDateString();
                 profilePointsEl.textContent = userData.points;
-                profileReferralEl.textContent = `${REFERRAL_BASE_URL}${userData.telegramUser}`; // Mock, actual referral ID would be different
-                profileReferralEl.href = `${REFERRAL_BASE_URL}${userData.telegramUser}`;
+                profileReferralEl.textContent = `${Tappinggamebot_bot}${userData.telegramUser}`; // Mock, actual referral ID would be different
+                profileReferralEl.href = `${Tappinggamebot_bot}${userData.telegramUser}`;
             }
 
             resetDataButton.addEventListener('click', () => {
